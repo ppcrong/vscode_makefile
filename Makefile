@@ -30,8 +30,8 @@ INCLUDE	:= include
 LIB		:= lib
 
 ifeq ($(OS),Windows_NT)
-MAIN-C	:= main-c.exe
-MAIN-CPP	:= main-cpp.exe
+MAIN_C	:= main-c.exe
+MAIN_CPP	:= main-cpp.exe
 SOURCEDIRS	:= $(SRC)
 INCLUDEDIRS	:= $(INCLUDE)
 LIBDIRS		:= $(LIB)
@@ -39,8 +39,8 @@ FIXPATH = $(subst /,\,$1)
 RM			:= del /q /f
 MD	:= mkdir
 else
-MAIN-C	:= main-c
-MAIN-CPP	:= main-cpp
+MAIN_C	:= main-c
+MAIN_CPP	:= main-cpp
 SOURCEDIRS	:= $(shell find $(SRC) -type d)
 INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
 LIBDIRS		:= $(shell find $(LIB) -type d)
@@ -60,8 +60,8 @@ SOURCES_C		:= $(wildcard $(patsubst %,%/*.c, $(SOURCEDIRS)))
 SOURCES_CPP		:= $(wildcard $(patsubst %,%/*.cpp, $(SOURCEDIRS)))
 
 # define the C object files 
-OBJECTS-C		:= $(SOURCES_C:.c=.o)
-OBJECTS-CPP		:= $(SOURCES_CPP:.cpp=.o)
+OBJECTS_C		:= $(SOURCES_C:.c=.o)
+OBJECTS_CPP		:= $(SOURCES_CPP:.cpp=.o)
 
 #
 # The following part of the makefile is generic; it can be used to 
@@ -69,19 +69,19 @@ OBJECTS-CPP		:= $(SOURCES_CPP:.cpp=.o)
 # deleting dependencies appended to the file from 'make depend'
 #
 
-OUTPUTMAIN-C	:= $(call FIXPATH,$(OUTPUT)/$(MAIN-C))
-OUTPUTMAIN-CPP	:= $(call FIXPATH,$(OUTPUT)/$(MAIN-CPP))
+OUTPUTMAIN_C	:= $(call FIXPATH,$(OUTPUT)/$(MAIN_C))
+OUTPUTMAIN_CPP	:= $(call FIXPATH,$(OUTPUT)/$(MAIN_CPP))
 
-all: $(OUTPUT) $(MAIN-C) $(MAIN-CPP)
+all: $(OUTPUT) $(MAIN_C) $(MAIN_CPP)
 	@echo Executing 'all' complete!
 
 $(OUTPUT):
 	$(MD) $(OUTPUT)
 
-$(MAIN-C): $(OBJECTS-C) 
-	$(CC) $(CFLAGS) $(INCLUDES) -o $(OUTPUTMAIN-C) $(OBJECTS-C) $(LFLAGS) $(LIBS)
-$(MAIN-CPP): $(OBJECTS-CPP) 
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN-CPP) $(OBJECTS-CPP) $(LFLAGS) $(LIBS)
+$(MAIN_C): $(OBJECTS_C) 
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(OUTPUTMAIN_C) $(OBJECTS_C) $(LFLAGS) $(LIBS)
+$(MAIN_CPP): $(OBJECTS_CPP) 
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $(OUTPUTMAIN_CPP) $(OBJECTS_CPP) $(LFLAGS) $(LIBS)
 
 # this is a suffix replacement rule for building .o's from .c's
 # it uses automatic variables $<: the name of the prerequisite of
@@ -94,13 +94,13 @@ $(MAIN-CPP): $(OBJECTS-CPP)
 
 .PHONY: clean
 clean:
-	$(RM) $(OUTPUTMAIN-C)
-	$(RM) $(OUTPUTMAIN-CPP)
-	$(RM) $(call FIXPATH,$(OBJECTS-C))
-	$(RM) $(call FIXPATH,$(OBJECTS-CPP))
+	$(RM) $(OUTPUTMAIN_C)
+	$(RM) $(OUTPUTMAIN_CPP)
+	$(RM) $(call FIXPATH,$(OBJECTS_C))
+	$(RM) $(call FIXPATH,$(OBJECTS_CPP))
 	@echo Cleanup complete!
 
 run: all
-	./$(OUTPUTMAIN-C)
-	./$(OUTPUTMAIN-CPP)
+	./$(OUTPUTMAIN_C)
+	./$(OUTPUTMAIN_CPP)
 	@echo Executing 'run: all' complete!
