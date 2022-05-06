@@ -5,6 +5,6 @@ try vscode extension "C/C++ Project Generator"
 
 `make main_c`
 
-## c++ project
+## cpp project
 
 `make main_cpp`
