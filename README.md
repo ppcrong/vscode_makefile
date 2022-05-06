@@ -3,8 +3,8 @@ try vscode extension "C/C++ Project Generator"
 
 ## c project
 
-`make main-c`
+`make main_c`
 
 ## c++ project
 
-`make main-cpp`
+`make main_cpp`
