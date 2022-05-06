@@ -30,8 +30,8 @@ INCLUDE	:= include
 LIB		:= lib
 
 ifeq ($(OS),Windows_NT)
-MAIN_C	:= main-c.exe
-MAIN_CPP	:= main-cpp.exe
+MAIN_C	:= main_c.exe
+MAIN_CPP	:= main_cpp.exe
 SOURCEDIRS	:= $(SRC)
 INCLUDEDIRS	:= $(INCLUDE)
 LIBDIRS		:= $(LIB)
@@ -39,8 +39,8 @@ FIXPATH = $(subst /,\,$1)
 RM			:= del /q /f
 MD	:= mkdir
 else
-MAIN_C	:= main-c
-MAIN_CPP	:= main-cpp
+MAIN_C	:= main_c
+MAIN_CPP	:= main_cpp
 SOURCEDIRS	:= $(shell find $(SRC) -type d)
 INCLUDEDIRS	:= $(shell find $(INCLUDE) -type d)
 LIBDIRS		:= $(shell find $(LIB) -type d)
